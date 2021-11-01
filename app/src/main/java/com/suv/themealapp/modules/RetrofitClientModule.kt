@@ -49,8 +49,8 @@ class RetrofitClientModule(private val context: Application) {
             okHttpClient.addInterceptor(it)
         }
 
-
-        // cache interceptor if network is not available or API fails
+        /* cache interceptor if network is not available or API fails then it will
+        use saved responses if any from last 7 days */
         okHttpClient.addInterceptor { chain ->
             var request = chain.request()
             request = if (!hasNetwork())
@@ -71,6 +71,7 @@ class RetrofitClientModule(private val context: Application) {
         return okHttpClient.build()
     }
 
+    // 5mb of cache to reuse saved responses in case network or api failure
     @Singleton
     @Provides
     fun providesCache(): Cache{
