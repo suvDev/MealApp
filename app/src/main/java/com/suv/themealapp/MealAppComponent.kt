@@ -1,10 +1,14 @@
 package com.suv.themealapp
 
-import com.suv.themealapp.activities.CategoryActivity
+import com.suv.themealapp.activities.MealsActivity
+import com.suv.themealapp.activities.MealsDetailsActivity
+import com.suv.themealapp.modules.RetrofitClientModule
 import dagger.Component
+import javax.inject.Singleton
 
-@Component
+@Singleton
+@Component(modules = [RetrofitClientModule::class])
 interface MealAppComponent {
-
-    fun inject(categoryActivity: CategoryActivity)
+    fun inject(mealsActivity: MealsActivity)
+    fun inject(mealsDetailsActivity: MealsDetailsActivity)
 }
