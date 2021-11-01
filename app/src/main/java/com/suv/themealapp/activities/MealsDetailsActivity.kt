@@ -30,8 +30,11 @@ class MealsDetailsActivity : AppCompatActivity() {
         val mealID = intent?.extras?.getString(Constant.MEAL_ID)
         if (mealID != null && mealID.isNotEmpty()) {
             initObserver()
+
+            // calling meal details api
             mealsDetailsViewModel.getMealDetails(mealID)
         } else {
+            // closing the activity if meal id is null or empty
             Toast.makeText(this, Constant.API_ERROR_MESSAGE, Toast.LENGTH_LONG).show()
             finish()
         }
@@ -42,13 +45,11 @@ class MealsDetailsActivity : AppCompatActivity() {
         mealsDetailsViewModel.mealDetails.observe(this, { resp ->
             when (resp?.status) {
                 Status.LOADING -> {
-//                    shimmer_view_container.visibility = View.VISIBLE
-//                    shimmer_view_container.startShimmer()
+                    progressBar.visibility = View.VISIBLE
                 }
                 Status.SUCCESS -> {
                     try {
-//                        shimmer_view_container.visibility = View.GONE
-//                        shimmer_view_container.stopShimmer()
+                        progressBar.visibility = View.GONE
                         if (resp.data != null) {
                             val response = resp.data as ResponseMealDetails
                             if (response.meals != null && response.meals.isNotEmpty()) {
@@ -61,8 +62,7 @@ class MealsDetailsActivity : AppCompatActivity() {
                 }
 
                 Status.ERROR -> {
-//                    shimmer_view_container.visibility = View.GONE
-//                    shimmer_view_container.stopShimmer()
+                    progressBar.visibility = View.GONE
                 }
             }
         })

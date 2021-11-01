@@ -69,9 +69,6 @@ dependencies {
     //shimmer
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
 
-    // okhttp profiler
-    implementation 'com.localebro:okhttpprofiler:1.0.8'
-
     def lifeCycle_version = '2.4.0'
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifeCycle_version"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifeCycle_version"

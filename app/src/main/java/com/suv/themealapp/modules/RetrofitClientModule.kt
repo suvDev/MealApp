@@ -5,7 +5,6 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
-import com.localebro.okhttpprofiler.OkHttpProfilerInterceptor
 import com.suv.themealapp.BuildConfig
 import com.suv.themealapp.network.ApiInterface
 import com.suv.themealapp.utils.Constant
@@ -50,6 +49,8 @@ class RetrofitClientModule(private val context: Application) {
             okHttpClient.addInterceptor(it)
         }
 
+
+        // cache interceptor if network is not available or API fails
         okHttpClient.addInterceptor { chain ->
             var request = chain.request()
             request = if (!hasNetwork())
@@ -86,7 +87,7 @@ class RetrofitClientModule(private val context: Application) {
                 HttpLoggingInterceptor.Level.NONE
         }
 
-        return arrayListOf(loggingInterceptor, OkHttpProfilerInterceptor())
+        return arrayListOf(loggingInterceptor)
     }
 
     private fun hasNetwork(): Boolean {
