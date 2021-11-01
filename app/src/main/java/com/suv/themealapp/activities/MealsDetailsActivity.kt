@@ -2,6 +2,7 @@ package com.suv.themealapp.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.suv.themealapp.MealApplication
@@ -16,7 +17,8 @@ import javax.inject.Inject
 
 class MealsDetailsActivity : AppCompatActivity() {
 
-    @Inject lateinit var mealsDetailsViewModel: MealsDetailsViewModel
+    @Inject
+    lateinit var mealsDetailsViewModel: MealsDetailsViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -26,10 +28,10 @@ class MealsDetailsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_meals)
 
         val mealID = intent?.extras?.getString(Constant.MEAL_ID)
-        if(mealID!=null && mealID.isNotEmpty()){
+        if (mealID != null && mealID.isNotEmpty()) {
             initObserver()
             mealsDetailsViewModel.getMealDetails(mealID)
-        } else{
+        } else {
             Toast.makeText(this, Constant.API_ERROR_MESSAGE, Toast.LENGTH_LONG).show()
             finish()
         }
@@ -50,7 +52,7 @@ class MealsDetailsActivity : AppCompatActivity() {
                         if (resp.data != null) {
                             val response = resp.data as ResponseMealDetails
                             if (response.meals != null && response.meals.isNotEmpty()) {
-                               initUI(response.meals[0])
+                                initUI(response.meals[0])
                             }
                         }
                     } catch (e: Exception) {
@@ -66,11 +68,119 @@ class MealsDetailsActivity : AppCompatActivity() {
         })
     }
 
-    private fun initUI(mealDetails: Meal){
-        try{
+    private fun initUI(mealDetails: Meal) {
+        try {
 
-            val text = Constant.BULLET_SYMBOL + mealDetails.strIngredient1 ?: ""
-            tv_ingredients_list.text = text
+            tv_meal_name.text = mealDetails.strMeal
+
+            var text = ""
+            mealDetails.strIngredient1?.let {
+                if(it.isNotEmpty()) {
+                    text += Constant.BULLET_SYMBOL + it
+                }
+            }
+            mealDetails.strIngredient2?.let {
+                if(it.isNotEmpty()) {
+                    text += Constant.BULLET_SYMBOL + it
+                }
+            }
+            mealDetails.strIngredient3?.let {
+                if(it.isNotEmpty()) {
+                    text += Constant.BULLET_SYMBOL + it
+                }
+            }
+            mealDetails.strIngredient4?.let {
+                if(it.isNotEmpty()) {
+                    text += Constant.BULLET_SYMBOL + it
+                }
+            }
+            mealDetails.strIngredient5?.let {
+                if(it.isNotEmpty()) {
+                    text += Constant.BULLET_SYMBOL + it
+                }
+            }
+            mealDetails.strIngredient6?.let {
+                if(it.isNotEmpty()) {
+                    text += Constant.BULLET_SYMBOL + it
+                }
+            }
+            mealDetails.strIngredient7?.let {
+                if(it.isNotEmpty()) {
+                    text += Constant.BULLET_SYMBOL + it
+                }
+            }
+            mealDetails.strIngredient8?.let {
+                if(it.isNotEmpty()) {
+                    text += Constant.BULLET_SYMBOL + it
+                }
+            }
+            mealDetails.strIngredient9?.let {
+                if(it.isNotEmpty()) {
+                    text += Constant.BULLET_SYMBOL + it
+                }
+            }
+            mealDetails.strIngredient10?.let {
+                if(it.isNotEmpty()) {
+                    text += Constant.BULLET_SYMBOL + it
+                }
+            }
+            mealDetails.strIngredient11?.let {
+                if(it.isNotEmpty()) {
+                    text += Constant.BULLET_SYMBOL + it
+                }
+            }
+            mealDetails.strIngredient12?.let {
+                if(it.isNotEmpty()) {
+                    text += Constant.BULLET_SYMBOL + it
+                }
+            }
+            mealDetails.strIngredient13?.let {
+                if(it.isNotEmpty()) {
+                    text += Constant.BULLET_SYMBOL + it
+                }
+            }
+            mealDetails.strIngredient14?.let {
+                if(it.isNotEmpty()) {
+                    text += Constant.BULLET_SYMBOL + it
+                }
+            }
+            mealDetails.strIngredient15?.let {
+                if(it.isNotEmpty()) {
+                    text += Constant.BULLET_SYMBOL + it
+                }
+            }
+            mealDetails.strIngredient16?.let {
+                if(it.isNotEmpty()) {
+                    text += Constant.BULLET_SYMBOL + it
+                }
+            }
+            mealDetails.strIngredient17?.let {
+                if(it.isNotEmpty()) {
+                    text += Constant.BULLET_SYMBOL + it
+                }
+            }
+            mealDetails.strIngredient18?.let {
+                if(it.isNotEmpty()) {
+                    text += Constant.BULLET_SYMBOL + it
+                }
+            }
+            mealDetails.strIngredient19?.let {
+                if(it.isNotEmpty()) {
+                    text += Constant.BULLET_SYMBOL + it
+                }
+            }
+            mealDetails.strIngredient20?.let {
+                if(it.isNotEmpty()) {
+                    text += Constant.BULLET_SYMBOL + it
+                }
+            }
+
+
+            if (text.isEmpty()) {
+                tv_ingredients.visibility = View.GONE
+            } else {
+                tv_ingredients_list.text = text
+            }
 
             Glide.with(this)
                 .load(mealDetails.strMealThumb)
@@ -78,7 +188,15 @@ class MealsDetailsActivity : AppCompatActivity() {
                 .error(R.drawable.ic_launcher_foreground)
                 .into(imv_meal)
 
-        }catch (e: Exception){
+            mealDetails.strInstructions.let {
+                if (it == null || it.isEmpty()) {
+                    tv_instructions.visibility = View.GONE
+                } else {
+                    tv_instructions_list.text = it
+                }
+            }
+
+        } catch (e: Exception) {
             e.printStackTrace()
         }
     }
