@@ -7,7 +7,7 @@ import retrofit2.http.Query
 
 interface ApiInterface {
 
-    @GET("/categories.php")
-    fun getUserData(): Response<ResponseCategoryModel>
+    @GET("/api/json/v1/1/categories.php")
+    suspend fun getCategoryList(): Response<ResponseCategoryModel>
 
 }
