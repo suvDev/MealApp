@@ -11,6 +11,7 @@
         android:id="@+id/imv_category"
         android:layout_width="@dimen/dp_300"
         android:layout_height="@dimen/dp_250"
+        android:layout_marginTop="@dimen/dp_10"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -20,8 +21,9 @@
         android:layout_width="@dimen/dp_0"
         android:layout_height="wrap_content"
         tools:text="@string/app_title"
+        android:text="@string/name_not_available"
         android:textColor="@color/white"
-        android:textSize="@dimen/dp_16"
+        android:textSize="12sp"
         android:textStyle="bold"
         android:gravity="center"
         android:layout_marginTop="@dimen/dp_10"
