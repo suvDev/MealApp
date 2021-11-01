@@ -4,4 +4,6 @@
     <string name="search_hint">Search for a Meal...</string>
     <string name="latest_meals">Latest Meals</string>
     <string name="name_not_available">Name not available</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="instructions">Instructions</string>
 </resources>
