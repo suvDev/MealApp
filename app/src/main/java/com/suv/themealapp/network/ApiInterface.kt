@@ -1,5 +1,6 @@
 package com.suv.themealapp.network
 
+import com.suv.themealapp.models.mealDetails.ResponseMealDetails
 import com.suv.themealapp.models.meals.ResponseMealsModel
 import retrofit2.Response
 import retrofit2.http.GET
@@ -14,6 +15,6 @@ interface ApiInterface {
     suspend fun searchForMeals(@Query("s") keyword: String): Response<ResponseMealsModel>
 
     @GET("/api/json/v1/1/lookup.php")
-    suspend fun getMealDetails(@Query("i") keyword: String): Response<ResponseMealsModel>
+    suspend fun getMealDetails(@Query("i") keyword: String): Response<ResponseMealDetails>
 
 }
