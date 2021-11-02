@@ -10,3 +10,5 @@ Features:
 2. You can search meals of your choice.
 3. You can read "how to prepare that meal" by clicking on the respective meal. 
 
+Development branch: suv_dev
+
