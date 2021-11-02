@@ -2,7 +2,8 @@
 A simple app which shows the recipes of random dishes.
 
 Architecture: MVVM 
-Others:       Coroutines, Dagger2, Kotlin, Retrofit
+
+Others:  Coroutines, Dagger2, Kotlin, Retrofit
 
 Features:
 1. Offline mode: App supports offline mode if API or network fails.
