@@ -12,7 +12,7 @@ import com.suv.themealapp.models.mealDetails.ResponseMealDetails
 import com.suv.themealapp.utils.Constant
 import com.suv.themealapp.utils.Status
 import com.suv.themealapp.viewmodels.MealsDetailsViewModel
-import kotlinx.android.synthetic.main.activity_meals.*
+import kotlinx.android.synthetic.main.activity_meal_details.*
 import javax.inject.Inject
 
 class MealsDetailsActivity : AppCompatActivity() {
@@ -25,7 +25,7 @@ class MealsDetailsActivity : AppCompatActivity() {
         (applicationContext as MealApplication).appComponent.inject(this)
 
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_meals)
+        setContentView(R.layout.activity_meal_details)
 
         val mealID = intent?.extras?.getString(Constant.MEAL_ID)
         if (mealID != null && mealID.isNotEmpty()) {
@@ -55,14 +55,21 @@ class MealsDetailsActivity : AppCompatActivity() {
                             if (response.meals != null && response.meals.isNotEmpty()) {
                                 initUI(response.meals[0])
                             }
+                        }else{
+                            Toast.makeText(this, Constant.API_ERROR_MESSAGE, Toast.LENGTH_LONG).show()
+                            finish()
                         }
                     } catch (e: Exception) {
+                        Toast.makeText(this, Constant.API_ERROR_MESSAGE, Toast.LENGTH_LONG).show()
+                        finish()
                         e.printStackTrace()
                     }
                 }
 
                 Status.ERROR -> {
                     progressBar.visibility = View.GONE
+                    Toast.makeText(this, Constant.API_ERROR_MESSAGE, Toast.LENGTH_LONG).show()
+                    finish()
                 }
             }
         })
