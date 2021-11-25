@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.suv.themealapp.MealApplication
@@ -17,13 +18,15 @@ import com.suv.themealapp.utils.Constant
 import com.suv.themealapp.utils.Status
 import com.suv.themealapp.utils.Utils
 import com.suv.themealapp.viewmodels.MealsActivityViewModel
+import com.suv.themealapp.viewmodels.ViewModelFactory
 import kotlinx.android.synthetic.main.activity_meals.*
 import javax.inject.Inject
 
 
 class MealsActivity : AppCompatActivity(), MealsListAdapter.ClickListener, View.OnClickListener {
 
-    @Inject lateinit var mealsActivityViewModel: MealsActivityViewModel
+    @Inject lateinit var factory: ViewModelFactory
+    lateinit var mealsActivityViewModel: MealsActivityViewModel
 
     private var listOfMeals = ArrayList<Meal>()
     private var adapter: MealsListAdapter ?= null
@@ -34,6 +37,8 @@ class MealsActivity : AppCompatActivity(), MealsListAdapter.ClickListener, View.
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_meals)
+
+        mealsActivityViewModel = ViewModelProvider(this, factory)[MealsActivityViewModel::class.java]
 
         //init clickListener and text watcher
         initListenersAndWatchers()

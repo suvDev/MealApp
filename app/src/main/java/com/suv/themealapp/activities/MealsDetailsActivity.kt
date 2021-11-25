@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.suv.themealapp.MealApplication
 import com.suv.themealapp.R
@@ -12,12 +13,15 @@ import com.suv.themealapp.models.mealDetails.ResponseMealDetails
 import com.suv.themealapp.utils.Constant
 import com.suv.themealapp.utils.Status
 import com.suv.themealapp.viewmodels.MealsDetailsViewModel
+import com.suv.themealapp.viewmodels.ViewModelFactory
 import kotlinx.android.synthetic.main.activity_meal_details.*
 import javax.inject.Inject
 
 class MealsDetailsActivity : AppCompatActivity() {
 
     @Inject
+    lateinit var factory: ViewModelFactory
+
     lateinit var mealsDetailsViewModel: MealsDetailsViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,6 +30,8 @@ class MealsDetailsActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_meal_details)
+
+        mealsDetailsViewModel = ViewModelProvider(this, factory)[MealsDetailsViewModel::class.java]
 
         val mealID = intent?.extras?.getString(Constant.MEAL_ID)
         if (mealID != null && mealID.isNotEmpty()) {
